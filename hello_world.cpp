@@ -6,6 +6,6 @@ int main()
 {
     int a=0;
     cout<<"hello world"<<endl;
-    //cin.get();
+    cin.get();
     return 0;
 }
