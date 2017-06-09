@@ -4,90 +4,76 @@
 
 using namespace std;
 
-const int maxn=100001;
+const int maxn = 100001;
 vector<int> G[maxn];
-int ind[maxn];
+//int ind[maxn];
 int ind2[maxn];
 int outd[maxn];
-int cnt=0;
+int cnt = 0;
 vector<int> topos;
 int d[maxn];
-int n,m;
+int n, m;
 
-void toposort();
-void dp();
+int dp(int i);
 void init();
 void work();
 
 int main()
 {
-	freopen("chain_2016.in","r",stdin);
-	freopen("chain_2016.out","w",stdout);
+	freopen("chain_2016.in", "r", stdin);
+	freopen("chain_2016.out", "w", stdout);
 	init();
-	toposort();
-	dp();
+	for (int i = 1; i <= n; ++i)
+	{
+		dp(i);
+	}
 	work();
-	cout<<cnt<<endl;
+	cout << cnt << endl;
 	return 0;
 }
 
 void init()
 {
-	cin>>n>>m;
-	int u,v;
-	for (int i=1;i<=m;++i)
+	cin >> n >> m;
+	int u, v;
+	for (int i = 1; i <= m; ++i)
 	{
-		cin>>u>>v;
+		cin >> u >> v;
 		G[u].push_back(v);
-		++ind[v];
+		//++ind[v];
 		++ind2[v];
 		++outd[u];
 	}
 }
 
-void toposort()
+int dp(int i)
 {
-	for (int i=1;i<=n;++i)
+	if (d[i] != 0)
 	{
-		int j=1;
-		while (ind[j]!=0) ++j;
-		topos.push_back(j);
-		ind[j]=-1;
-		int size=G[j].size();
-		for (int k=0;k<size;++k)
-		{
-			--ind[G[j][k]];
-		}
+		return d[i];
 	}
-}
-
-void dp()
-{
-    int size=topos.size();
-    for (int i=size-1;i>=0;--i)
-    {
-        int cur=topos[i];
-        d[cur]=0;
-        if (outd[cur]==0)
-        {
-            d[cur]=1;
-            continue;
-        }
-        for (int j=0;j<G[cur].size();++j)
-        {
-            d[cur] += d[ G[cur][j] ];
-        }
-    }
+	if (outd[i] == 0)
+	{
+		d[i] = 1;
+		return d[i];
+	}
+	d[i] = 0;
+	int size = G[i].size();
+	for (int j = 0; j < size; ++j)
+	{
+		d[i] += dp(G[i][j]);
+	}
+	return d[i];
 }
 
 void work()
 {
-	cnt=0;
-	for (int i=1;i<=n;++i)
+	cnt = 0;
+	for (int i = 1; i <= n; ++i)
 	{
-		if (ind2[i]==0&&outd[i]!=0)
+		if (ind2[i] == 0 && outd[i] != 0)
 		{
-			cnt+=d[i];
+			cnt += d[i];
 		}
 	}
 	return;
