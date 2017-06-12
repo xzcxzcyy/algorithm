@@ -3,6 +3,7 @@
     "files.associations": {
         "*.tcc": "cpp",
         "iostream": "cpp",
-        "xlocale": "cpp"
+        "xlocale": "cpp",
+        "ostream": "cpp"
     }
 }
