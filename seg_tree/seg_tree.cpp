@@ -4,6 +4,8 @@
 
 using namespace std;
 
+const int INF = 20000000;
+
 class Seg_tree_node;
 typedef Seg_tree_node * seg_pointer;
 
@@ -16,11 +18,12 @@ class Seg_tree_node
     seg_pointer lchild, rchild;
 
     void create(int arr[], int left, int right);
+	int query(int l, int r);
 };
 
-inline int mselect(const Seg_tree_node *a, const Seg_tree_node *b)
+inline int mselect(const int a, const int b)
 {
-    return min(a->val, b->val);
+	return min(a, b);
 }
 
 void Seg_tree_node::create(int arr[], int l, int r)
@@ -43,15 +46,32 @@ void Seg_tree_node::create(int arr[], int l, int r)
 		rchild = new Seg_tree_node;
 		lchild->create(arr, left, m);
 		rchild->create(arr, m + 1, right);
-		val = mselect(lchild, rchild);
+		val = mselect(lchild->val, rchild->val);
 	}
+}
+
+int Seg_tree_node::query(int ql, int qr)
+{
+	if (qr<left || ql>right)
+	{
+		return INF;
+	}
+	if (ql<=left && right<=qr)
+	{
+		return val;
+	}
+	int m = (ql + qr) / 2;
+	return mselect(lchild->query(ql, qr), rchild->query(ql, qr));
 }
 
 int main()
 {
-	int arr[7] = { 0,1, 2, 3, 4, 5, 6 };
+	int arr[6] = { 2, 5, 1, 4, 9, 3 };
     Seg_tree_node root;
-    root.create(arr,0,6);
+    root.create(arr,0,5);
+	cout << root.query(0, 2);
     cout<<"done"<<endl;
     return 0;
 }
+
+
