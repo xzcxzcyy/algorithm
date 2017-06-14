@@ -4,6 +4,8 @@
         "*.tcc": "cpp",
         "iostream": "cpp",
         "xlocale": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "ios": "cpp",
+        "xiosbase": "cpp"
     }
 }
