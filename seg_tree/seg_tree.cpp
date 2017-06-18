@@ -12,7 +12,7 @@ using namespace std;
 const int INF = 20000000;
 
 class Seg_tree_node;
-typedef Seg_tree_node * seg_pointer;
+typedef Seg_tree_node *seg_pointer;
 
 class Seg_tree_node
 {
@@ -49,7 +49,7 @@ void Seg_tree_node::create(int arr[], int l, int r)
 	{
 		left = l;
 		right = r;
-		int m = (left + right) / 2;
+		int m = (left + right) >> 1;
 		is_leaf = false;
 		lchild = new Seg_tree_node;
 		rchild = new Seg_tree_node;
@@ -74,7 +74,7 @@ int Seg_tree_node::query(int ql, int qr)
 	{
 		return val;
 	}
-	int m = (ql + qr) / 2;
+	int m = (ql + qr) >> 1;
 	return mselect(lchild->query(ql, qr), rchild->query(ql, qr));
 }
 
