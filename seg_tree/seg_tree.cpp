@@ -2,6 +2,7 @@
 #include <cstdio>
 #include <algorithm>
 #define DEBUG
+#define MID(x, y) ((x + y) >> 1)
 
 /*
 seg_tree :: calculate the min number
@@ -27,7 +28,7 @@ class Seg_tree_node
 	void create(int arr[], int left, int right);
 	int query(int l, int r);
 	void push_down();
-	void wide_modify(int l, int r, int val);
+	void modify(int l, int r, int val);
 };
 
 inline int mselect(const int a, const int b)
@@ -49,7 +50,7 @@ void Seg_tree_node::create(int arr[], int l, int r)
 	{
 		left = l;
 		right = r;
-		int m = (left + right) >> 1;
+		int m = MID(left, right);
 		is_leaf = false;
 		lchild = new Seg_tree_node;
 		rchild = new Seg_tree_node;
@@ -74,7 +75,7 @@ int Seg_tree_node::query(int ql, int qr)
 	{
 		return val;
 	}
-	int m = (ql + qr) >> 1;
+	int m = MID(ql, qr);
 	return mselect(lchild->query(ql, qr), rchild->query(ql, qr));
 }
 
@@ -98,28 +99,28 @@ void Seg_tree_node::push_down()
 	lazy = 0;
 }
 
-void Seg_tree_node::wide_modify(int l, int r, int v)
+void Seg_tree_node::modify(int l, int r, int v)
 {
-	if (right < l || left > r)
-	{
-		return;
-	}
 	if (l <= left && right <= r)
 	{
 		val += v; //if the seg_tree type isn't the same,then change this part
 		lazy += v;
 		return;
 	}
-	if (!is_leaf)
+	if (lazy != 0)
 	{
-		if (lazy != 0)
-		{
-			push_down();
-		}
-		lchild->wide_modify(l, r, v);
-		rchild->wide_modify(l, r, v);
-		val = mselect(lchild->val, rchild->val);
+		push_down();
 	}
+	int m = MID(left, right);
+	if (l <= m)
+	{
+		lchild->modify(l, r, v);
+	}
+	if (r > m)
+	{
+		rchild->modify(l, r, v);
+	}
+	val = mselect(lchild->val, rchild->val);
 }
 
 int main()
@@ -131,7 +132,7 @@ int main()
 	cout << root.query(0, 5) << endl;
 
 	cout << "modify:" << endl;
-	root.wide_modify(0, 5, 100);
+	root.modify(0, 5, 100);
 	cout << "query2:" << endl;
 	cout << root.query(0, 5) << endl;
 	return 0;
