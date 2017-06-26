@@ -102,26 +102,33 @@ void Seg_tree_node::push_down()
 
 void Seg_tree_node::wide_modify(int l, int r, long long v)
 {
+    /*
     if (right < l || left > r)
     {
         return;
     }
+    */
     if (l <= left && right <= r)
     {
         val += v * (right - left + 1); //if the seg_tree type isn't the same,then change this part
         lazy += v;
         return;
     }
-    if (!is_leaf)
+
+    if (lazy != 0)
     {
-        if (lazy != 0)
-        {
-            push_down();
-        }
-        lchild->wide_modify(l, r, v);
-        rchild->wide_modify(l, r, v);
-        val = mselect(lchild->val, rchild->val);
+        push_down();
     }
+    int m = (left + right) >> 1;
+    if (l <= m)
+    {
+        lchild->wide_modify(l, r, v);
+    }
+    if (r > m)
+    {
+        rchild->wide_modify(l, r, v);
+    }
+    val = mselect(lchild->val, rchild->val);
 }
 
 const int maxn = 100001;
