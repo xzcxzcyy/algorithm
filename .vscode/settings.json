@@ -7,5 +7,10 @@
         "ostream": "cpp",
         "ios": "cpp",
         "xiosbase": "cpp"
-    }
+    },
+    "clang.cxxflags": [
+        "--target=x86_64-w64-windows-gnu",
+        "-std=c++11"
+    ],
+    "clang.executable": "/usr/bin/clang"
 }
