@@ -4,8 +4,6 @@ using namespace std;
 
 int main()
 {
-    int a=0;
-    cout<<"hello world"<<endl;
-    cin.get();
+    cout << "helloworld" << endl;
     return 0;
 }
