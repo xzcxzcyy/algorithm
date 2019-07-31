@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdio>
 #include <iomanip>
-//#define DEBUG
+#define DEBUG
 
 using namespace std;
 
