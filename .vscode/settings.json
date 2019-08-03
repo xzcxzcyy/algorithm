@@ -7,6 +7,7 @@
         "ostream": "cpp",
         "ios": "cpp",
         "xiosbase": "cpp",
-        "C_Cpp.intelliSenseEngine": "Default"
+        "C_Cpp.intelliSenseEngine": "Default",
+        "istream": "cpp"
     }
 }
