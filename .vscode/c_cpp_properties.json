@@ -1,69 +1,19 @@
 {
     "configurations": [
         {
-            "name": "Mac",
-            "includePath": [
-                "/usr/include",
-                "/usr/local/include"
-            ],
-            "browse": {
-                "limitSymbolsToIncludedHeaders": true,
-                "databaseFilename": "",
-                "path": [
-                    "/usr/include",
-                    "/usr/local/include",
-                    "${workspaceRoot}"
-                ]
-            },
-            "intelliSenseMode": "clang-x64",
-            "macFrameworkPath": [
-                "/System/Library/Frameworks",
-                "/Library/Frameworks"
-            ],
-            "compilerPath": "/usr/bin/gcc",
-            "cStandard": "c11",
-            "cppStandard": "c++17"
-        },
-        {
-            "name": "Linux",
-            "includePath": [
-                "/usr/include",
-                "/usr/local/include"
-            ],
-            "browse": {
-                "limitSymbolsToIncludedHeaders": true,
-                "databaseFilename": "",
-                "path": [
-                    "/usr/include",
-                    "/usr/local/include",
-                    "${workspaceRoot}"
-                ]
-            },
-            "intelliSenseMode": "clang-x64",
-            "compilerPath": "/usr/bin/gcc",
-            "cStandard": "c11",
-            "cppStandard": "c++17"
-        },
-        {
             "name": "Win32",
             "includePath": [
-                "C:/MinGW/include",
-                "C:/MinGW/lib/gcc/mingw32/5.3.0/include/c++",
-                "c:/MinGW/lib/gcc/mingw32/5.3.0/include/c++/mingw32"
+                "${workspaceFolder}/**"
             ],
-            "browse": {
-                "limitSymbolsToIncludedHeaders": true,
-                "databaseFilename": "",
-                "path": [
-                    "C:/MinGW/include",
-                    "C:/MinGW/lib/gcc/mingw32/5.3.0/include/c++",
-                    "${workspaceRoot}"
-                ]
-            },
-            
-            "compilerPath": "/usr/bin/gcc",
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "C:\\msys64\\mingw64\\bin\\g++.exe",
             "cStandard": "c11",
-            "cppStandard": "c++17"
+            "cppStandard": "c++17",
+            "intelliSenseMode": "clang-x64"
         }
     ],
     "version": 4
