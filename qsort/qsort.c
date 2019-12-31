@@ -37,7 +37,6 @@ int main()
         scanf("%d", &arr[i]);
     }
     mqsort(arr, arr + n);
-    printf("%d", n);
     for (int i = 0; i < n; ++i)
     {
         printf("%d ", arr[i]);
@@ -53,22 +52,31 @@ void mqsort(int *begin, int *end)
     }
     swap(begin, begin + (end - begin) / 2);
     int *p = begin;
-    int *a = begin, *b = end - 1;
-    while (a < b)
+    int temp = *p;
+    int *a = begin, *b = end;
+    while (1)
     {
-        if (*p <= *b)
+        while (*(++a) < temp)
         {
-            --b;
-            continue;
+            if (a == end - 1)
+            {
+                break;
+            }
         }
-        if (*a <= *p)
+        while (temp < *(--b))
         {
-            ++a;
-            continue;
+            if (b == begin)
+            {
+                break;
+            }
+        }
+        if (a >= b)
+        {
+            break;
         }
         swap(a, b);
     }
-    swap(p, a);
+    swap(p, b);
     mqsort(begin, a);
     mqsort(a + 1, end);
 }

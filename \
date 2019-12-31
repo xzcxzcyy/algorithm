@@ -1,0 +1,18 @@
+127.0.0.1	localhost
+127.0.1.1	banson-pc
+::1	localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+# Google GoLang Start
+172.217.14.127	golang.org
+172.217.14.127	golang-consa.l.google.com
+172.217.14.128	tour.golang.org
+# Google GoLang End
+
+# Github Start
+13.250.177.223	gist.github.com
+# 13.250.177.223	github.com
+# 13.229.188.59	www.github.com
+# Github End
+
