@@ -48,29 +48,34 @@ void mqsort(int *begin, int *end)
     {
         return;
     }
-
-    int *i = begin, *j = end - 1;
-    int pivot = *(begin + mrand(end - begin));
-    while (i <= j)
+    swap(begin, begin + (end - begin) / 2);
+    int *p = begin;
+    int temp = *p;
+    int *a = begin, *b = end;
+    while (1)
     {
-        while (*i < pivot)
+        while (*(++a) < temp)
         {
-            ++i;
+            if (a == end - 1)
+            {
+                break;
+            }
         }
-        while (*j > pivot)
+        while (temp < *(--b))
         {
-            --j;
+            if (b == begin)
+            {
+                break;
+            }
         }
-        if (i <= j)
+        if (a >= b)
         {
-            swap(i, j);
-            ++i;
-            --j;
+            break;
         }
     }
-
-    mqsort(begin, j + 1);
-    mqsort(i, end);
+    swap(p, b);
+    mqsort(begin, a);
+    mqsort(a + 1, end);
 }
 
 void swap(int *x, int *y)
