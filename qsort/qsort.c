@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <time.h>
 #include <inttypes.h>
-#include <assert.h>
-#pragma GCC("-W1,--stack=128000000")
 
 void mqsort(int *begin, int *end);
 void swap(int *x, int *y);
@@ -28,8 +26,8 @@ int arr[100010];
 
 int main()
 {
-    //freopen(".\\qsort\\testdata.in", "r", stdin);
-    //srand(time(NULL));
+    freopen("sort.in", "r", stdin);
+    freopen("sort.out", "w", stdout);
     int n;
     scanf("%d", &n);
     for (int i = 0; i < n; ++i)
@@ -37,7 +35,6 @@ int main()
         scanf("%d", &arr[i]);
     }
     mqsort(arr, arr + n);
-    printf("%d", n);
     for (int i = 0; i < n; ++i)
     {
         printf("%d ", arr[i]);
@@ -51,26 +48,29 @@ void mqsort(int *begin, int *end)
     {
         return;
     }
-    swap(begin, begin + (end - begin) / 2);
-    int *p = begin;
-    int *a = begin, *b = end - 1;
-    while (a < b)
+
+    int *i = begin, *j = end - 1;
+    int pivot = *(begin + mrand(end - begin));
+    while (i <= j)
     {
-        if (*p <= *b)
+        while (*i < pivot)
         {
-            --b;
-            continue;
+            ++i;
         }
-        if (*a <= *p)
+        while (*j > pivot)
         {
-            ++a;
-            continue;
+            --j;
         }
-        swap(a, b);
+        if (i <= j)
+        {
+            swap(i, j);
+            ++i;
+            --j;
+        }
     }
-    swap(p, a);
-    mqsort(begin, a);
-    mqsort(a + 1, end);
+
+    mqsort(begin, j + 1);
+    mqsort(i, end);
 }
 
 void swap(int *x, int *y)
@@ -83,9 +83,9 @@ void swap(int *x, int *y)
 
 int mrand(int length)
 {
-    int a = rand() % length;
-    int b = rand() % length;
-    int c = rand() % length;
+    int a = xor128() % length;
+    int b = xor128() % length;
+    int c = xor128() % length;
 
     if (a <= b && b <= c || c <= b && b <= a)
     {
